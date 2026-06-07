@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
   font-family: Arial, sans-serif;
@@ -19,7 +23,7 @@ body.dark {
 .app {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: minmax(0, 1fr) 420px;
   gap: 40px;
   padding: 50px;
   align-items: center;
@@ -39,7 +43,7 @@ body.dark {
 }
 
 h1 {
-  font-size: 52px;
+  font-size: clamp(28px, 5vw, 52px);
   line-height: 1.1;
   margin-bottom: 20px;
 }
@@ -93,6 +97,7 @@ h1 {
   border-radius: 50%;
   background: #ffffff;
   font-size: 28px;
+  flex-shrink: 0;
 }
 
 .chat-header h2 {
@@ -111,13 +116,16 @@ h1 {
 }
 
 .user-message,
-.bot-message {
+.bot-message,
+.error-message {
   max-width: 85%;
   padding: 14px 16px;
   margin-bottom: 14px;
   border-radius: 18px;
   line-height: 1.5;
   animation: fadeIn 0.5s ease;
+  white-space: pre-line;
+  word-wrap: break-word;
 }
 
 .user-message {
@@ -134,80 +142,16 @@ h1 {
   border-bottom-left-radius: 4px;
 }
 
+.error-message {
+  margin-right: auto;
+  background: #7f1d1d;
+  color: white;
+  border-bottom-left-radius: 4px;
+}
+
 .typing {
   opacity: 0.7;
   font-style: italic;
-}
-
-.chat-input {
-  display: flex;
-  gap: 10px;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 15px;
-  border: none;
-  border-radius: 14px;
-  outline: none;
-  font-size: 15px;
-}
-
-.chat-input button {
-  padding: 15px 20px;
-  border: none;
-  border-radius: 14px;
-  background: #111827;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.chat-input button:hover {
-  background: #000000;
-  transform: scale(1.05);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .app {
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 34px;
-  }
-
-  .chat-container {
-    height: 600px;
-  }
 }
 
 .weather-panel {
@@ -217,8 +161,17 @@ h1 {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.weather-panel input {
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.weather-panel input,
+.chat-input input {
   flex: 1;
+  min-width: 0;
   padding: 15px;
   border: none;
   border-radius: 14px;
@@ -226,19 +179,33 @@ h1 {
   font-size: 15px;
 }
 
-.weather-panel button {
-  padding: 15px 18px;
+.weather-panel button,
+.chat-input button {
+  padding: 15px 20px;
   border: none;
   border-radius: 14px;
-  background: #2563eb;
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  white-space: nowrap;
+}
+
+.weather-panel button {
+  background: #2563eb;
 }
 
 .weather-panel button:hover {
   background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.chat-input button {
+  background: #111827;
+}
+
+.chat-input button:hover {
+  background: #000000;
   transform: scale(1.05);
 }
 
@@ -247,7 +214,123 @@ h1 {
   background: #fee2e2;
 }
 
-.error-message {
-  background: #7f1d1d;
-  color: white;
+/* Laptop */
+@media (max-width: 1200px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    padding: 36px;
+  }
+}
+
+/* Tablet poziomy / mały laptop */
+@media (max-width: 992px) {
+  .app {
+    grid-template-columns: 1fr;
+    padding: 28px;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .subtitle {
+    margin: 0 auto;
+  }
+
+  .chat-container {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    height: 620px;
+  }
+}
+
+/* Tablet / telefon */
+@media (max-width: 768px) {
+  .app {
+    padding: 18px;
+    gap: 24px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .chat-container {
+    height: 620px;
+    border-radius: 22px;
+  }
+
+  .weather-panel,
+  .chat-input {
+    flex-direction: column;
+  }
+
+  .weather-panel button,
+  .chat-input button {
+    width: 100%;
+  }
+
+  .user-message,
+  .bot-message,
+  .error-message {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* Mały telefon */
+@media (max-width: 480px) {
+  .app {
+    padding: 12px;
+  }
+
+  .badge {
+    font-size: 13px;
+  }
+
+  .theme-btn {
+    width: 100%;
+  }
+
+  .chat-container {
+    height: 580px;
+    border-radius: 18px;
+  }
+
+  .chat-header {
+    padding: 16px;
+  }
+
+  .bot-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+
+  .chat-header h2 {
+    font-size: 17px;
+  }
+
+  .chat-header p {
+    font-size: 12px;
+  }
+
+  .chat-box {
+    padding: 14px;
+  }
+
+  .weather-panel,
+  .chat-input {
+    padding: 12px;
+  }
+
+  .weather-panel input,
+  .chat-input input,
+  .weather-panel button,
+  .chat-input button {
+    font-size: 14px;
+    padding: 13px;
+  }
 }

@@ -209,3 +209,45 @@ h1 {
     height: 600px;
   }
 }
+
+.weather-panel {
+  display: flex;
+  gap: 10px;
+  padding: 18px 18px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.weather-panel input {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  outline: none;
+  font-size: 15px;
+}
+
+.weather-panel button {
+  padding: 15px 18px;
+  border: none;
+  border-radius: 14px;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.weather-panel button:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.input-error {
+  border: 2px solid #ef4444 !important;
+  background: #fee2e2;
+}
+
+.error-message {
+  background: #7f1d1d;
+  color: white;
+}

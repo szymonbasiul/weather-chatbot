@@ -1,46 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather AI Assistant</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather AI Assistant</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero">
+        <p class="badge">AI Weather Assistant</p>
+        <h1>Bot doradzający ubiór do pogody</h1>
+        <p class="subtitle">
+          Wpisz pogodę, np. „Jest 7 stopni i pada deszcz”, a bot doradzi Ci
+          odpowiedni ubiór.
+        </p>
+        <button id="theme-btn" class="theme-btn">🌙 Dark mode</button>
+      </section>
 
-  <main class="app">
-    <section class="hero">
-      <p class="badge">AI Weather Assistant</p>
-      <h1>Bot doradzający ubiór do pogody</h1>
-      <p class="subtitle">
-        Wpisz pogodę, np. „Jest 7 stopni i pada deszcz”, a bot doradzi Ci odpowiedni ubiór.
-      </p>
-      <button id="theme-btn" class="theme-btn">🌙 Dark mode</button>
-    </section>
-
-    <section class="chat-container" aria-label="Okno czatu">
-      <div class="chat-header">
-        <div class="bot-avatar">🤖</div>
-        <div>
-          <h2>Weather AI Assistant</h2>
-          <p>Online • gotowy do pomocy</p>
+      <section class="chat-container" aria-label="Okno czatu">
+        <div class="chat-header">
+          <div class="bot-avatar">🤖</div>
+          <div>
+            <h2>Weather AI Assistant</h2>
+            <p>Online • gotowy do pomocy</p>
+          </div>
         </div>
-      </div>
 
-      <div id="chat-box" class="chat-box"></div>
+        <div id="chat-box" class="chat-box"></div>
+        <div class="weather-panel">
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Wpisz miasto, np. Warszawa"
+            aria-label="Wpisz miasto"
+          />
+          <button id="weather-btn">Sprawdź pogodę</button>
+        </div>
 
-      <div class="chat-input">
-        <input
-          type="text"
-          id="user-input"
-          placeholder="Np. Jest 7 stopni i pada deszcz..."
-          aria-label="Wpisz wiadomość"
-        />
-        <button id="send-btn">Wyślij</button>
-      </div>
-    </section>
-  </main>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Np. Jest 7 stopni i pada deszcz..."
+            aria-label="Wpisz wiadomość"
+          />
+          <button id="send-btn">Wyślij</button>
+        </div>
+      </section>
+    </main>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
